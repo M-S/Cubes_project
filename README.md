@@ -29,4 +29,8 @@ program.
 
 To get output:
 ----------------
-Enter the values in the text area of the html page
+Browse https://m-s.github.io/Cubes_project/ 
+or 
+clone the project open the index.html page in browser. 
+
+Enter the values in the text area of the html page and press 'submit' button 
