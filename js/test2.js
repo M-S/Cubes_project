@@ -70,22 +70,20 @@ function onSubmit(){
   //check if Vb < Vc
   for(var i = 0; i<boxVolumeArray.length; i++){
     var cubesVolume=0;
+    var result=0;
     for(var j=0;j<cubeVolumeArray[i].length;j++){ //To find total volume of all cubes in each cubeVolume Array elements
     cubesVolume= Number(cubeVolumeArray[i][j])+cubesVolume;
     }
     var boxVolume = Number(boxVolumeArray[i]);
     if(boxVolume>cubesVolume){
-      var result = -1;
-      resultArray.push(result);
+      result = -1;
     }else{
-      var result=0;
       var powersArray = powersOfTwo(cubeArray[i][0].length);
       for (n=cubeArray[i][0].length-1; n>=0; n--){
         var cubeNumber = Number(cubeArray[i][0][n]);
         var boxVolume1 = boxVolume - cubeNumber*Math.pow(Number(powersArray[n]),3);
         if(boxVolume1<0){
           result =Math.floor(result+boxVolume/(Math.pow(Number(powersArray[n]),3)));
-          resultArray.push(result);
           break;
         }else if(boxVolume1>0){
           result = result + cubeNumber;
@@ -93,6 +91,7 @@ function onSubmit(){
         }
       }
     }
+    resultArray.push(parseInt(result));
   }
     return resultArray;
  }
