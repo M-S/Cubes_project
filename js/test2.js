@@ -67,60 +67,33 @@ function onSubmit(){
   /***Check for conditions*****/
 
   var resultArray =[];//to store result
-  for (var i=0;i<cubeVolumeArray.length;i++){
-    var cubeArrayLength = cubeArray[i][0].length;
-    var powersArray = powersOfTwo(cubeArray[i][0].length);
-    var sumVol=0;
+  //check if Vb < Vc
+  for(var i = 0; i<boxVolumeArray.length; i++){
+    var cubesVolume=0;
     for(var j=0;j<cubeVolumeArray[i].length;j++){ //To find total volume of all cubes in each cubeVolume Array elements
-      sumVol= cubeVolumeArray[i][j]+sumVol;
+    cubesVolume= Number(cubeVolumeArray[i][j])+cubesVolume;
     }
-    if(boxVolumeArray[i]>sumVol){ //check if volume of box is greater than tot volume of cubes, result = -1
-      resultArray.push(-1);
-      console.log("Array Number:"+i);
-    } else if(Number(boxVolumeArray[i])<sumVol){
-        if(cubeArrayLength==1){
-          console.log("Array Number:"+i);
-            var count = Number(boxVolumeArray[i]);//if there is only 1*1*1 sized cube , then smaller number is box Volume /(1*1*1).
-            resultArray.push(count);
-          } else if(cubeArrayLength>1){ //if there are more than one size of cubes .
-            console.log("Array Number:"+i);
-            var vol = boxVolumeArray[i];
-            var diffVol=0;
-            var count=0; //to take count of the number of cubes for result
-            var j=cubeArrayLength;
-              // Example cubeArray[0]=[10,10,1], j = 3
-              var cubePower = Math.pow(powersArray[j-1],3);// eg cubePower = 4*4*4 = 64
-              var cubeCount = Number(cubeArray[i][0][j-1]);//Number of largest sized cube eg: cubeCount =1 = cubeArray[3][0][3]
-
-              count = cubeCount; // count = 1
-              //console.log("Cube Count:"+ cubeCount);
-
-              if(vol>cubeCount*cubePower){ // if volume of box(4*4*8=128)> volume of largest sized cube(1*4*4*4=64)
-
-                diffVol = vol-cubeCount*cubePower;//diffVol = 128-64=64
-                console.log("diffVol for array element[ "+ i +" ] "+diffVol);
-
-                cubePower = Math.pow(powersArray[j-2],3);//cubePower = 2*2*2=8
-                //console.log("New Cube Power:"+cubePower);
-
-                cubeCount = Number(cubeArray[i][0][j-2]);//next sized cube number, cubeCount = 10 = cubeArray[3][0][2]
-                //console.log("New Cube Count:"+ cubeCount);
-
-                if(diffVol/cubePower> cubeCount){ // 64/(2*2*2)=8, 8 is not greater than cubeCount 10
-                  count = count + cubeCount;
-                  console.log("New count:"+count);
-                  vol = diffVol/cubePower - cubeCount;
-
-                } else if(diffVol/cubePower< cubeCount){ // 8<10,i.e, only 8more is required to fill the box, therefore total no. of cubes = 1+8=9, the result is 9
-                  count = count + diffVol/cubePower;
-                  console.log("New count:"+count);
-                }
-
-              }
-            resultArray.push(count);// push the result to array
-          }
+    var boxVolume = Number(boxVolumeArray[i]);
+    if(boxVolume>cubesVolume){
+      var result = -1;
+      resultArray.push(result);
+    }else{
+      var result=0;
+      var powersArray = powersOfTwo(cubeArray[i][0].length);
+      for (n=cubeArray[i][0].length-1; n>=0; n--){
+        var cubeNumber = Number(cubeArray[i][0][n]);
+        var boxVolume1 = boxVolume - cubeNumber*Math.pow(Number(powersArray[n]),3);
+        if(boxVolume1<0){
+          result =Math.floor(result+boxVolume/(Math.pow(Number(powersArray[n]),3)));
+          resultArray.push(result);
+          break;
+        }else if(boxVolume1>0){
+          result = result + cubeNumber;
+          boxVolume = boxVolume1;
         }
+      }
     }
+  }
     return resultArray;
  }
   document.getElementById('result').innerHTML=findCubes().join(" <br> ");// to display result on html element .
