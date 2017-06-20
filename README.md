@@ -34,3 +34,50 @@ or
 clone the project open the index.html page in browser. 
 
 Enter the values in the text area of the html page and press 'submit' button 
+Algorithm for Cubes Project
+***************************
+Step 1:
+	Get the input on buttonClick and store the box dimensions in 'boxArray' and cube numbers in 'cubeArray'.
+
+Step 2:
+	Create a function to find the volume of box
+
+Step 3: 
+	Create a function to find power of 2 (to calculate cube size) with the same cube array length and store in  'powersArray'
+
+Step 4:
+ 	Create a function to find the smallest number of cubes that will fit in a box and return the result in 'resultArray'.
+
+Step5:
+	Inside the function , create a 'boxVolumeArray' to find the volume of the boxes.
+
+Step 6: 
+	Create also a 'cubeVolumeArray' that store the volume of cubes with respective sizes (powers of 2).
+
+Step 7:
+	Create a loop iterating through each elements of all arrays to check for conditions
+
+Step 8:
+	Check whether the volume of box is greater than total of volume of cubes of all sizes.
+
+Step 9: 
+	If true , then the smallest no. of cubes cannot be determined , result is -1,store in result Array.
+
+Step 10: 
+	If volume of box is lesser, then find the difference (boxVolume1) between volume of box (boxVolume) and the volume of last cube element.
+
+Step 11:
+	If the difference in volume(boxVolume1) is negative, then the smallest no. of cubes =  volume of box/ size of last cube , store the result in result Array, and continue to the next element in the loop.
+
+Step 12:
+	If the difference in volume(boxVolume1)  is positive, then the smallest no.of cubes = no. of cubes of last size.
+
+Step 13:
+	Repeat from step 10, with the difference in volume as new volume of box(boxVolume = boxVolume1), 
+	the new difference(boxVolume1) is between new volume of box(boxVolume) and the volume of the second last element,
+	repeat step 10 to step 13 and add all the smallest no.of cubes(result) till the first element of cube is reached.  Store the final result in resultArray. 
+	Continue to the next element in the  loop.
+
+Step 14: 
+	After looping , display the resultArray with the results each element in new line. 
+
