@@ -34,6 +34,7 @@ or
 clone the project open the index.html page in browser. 
 
 Enter the values in the text area of the html page and press 'submit' button 
+***************************
 Algorithm for Cubes Project
 ***************************
 Step 1:
